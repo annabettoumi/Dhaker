@@ -1,2 +1,0 @@
-# Dhaker
-Dhaker bisous
