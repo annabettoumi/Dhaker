@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pour Dhaker ❤️</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0; min-height:100vh; overflow:hidden;
+  display:flex; align-items:center; justify-content:center;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:radial-gradient(circle at top,#ffdce8,#ffb6cf 45%,#ff8fb5);
+  color:#5b1835;
+}
+.card{
+  width:min(92vw,430px); padding:38px 25px 32px;
+  text-align:center; border-radius:30px;
+  background:rgba(255,255,255,.78);
+  backdrop-filter:blur(12px);
+  box-shadow:0 20px 60px rgba(100,20,55,.22);
+  position:relative; z-index:2;
+}
+.emoji{font-size:58px; animation:beat 1s infinite}
+h1{font-size:28px; margin:12px 0 8px}
+p{font-size:17px; margin:0 0 27px; line-height:1.5}
+.buttons{height:125px; position:relative}
+button{
+  border:0; border-radius:999px; padding:15px 25px;
+  font-size:17px; font-weight:700; cursor:pointer;
+  box-shadow:0 8px 20px rgba(90,20,50,.18);
+  transition:.2s;
+}
+#yes{background:#ff477e;color:white; position:relative; z-index:3}
+#no{background:white;color:#d53b68; position:absolute; left:52%; top:58px}
+.hidden{display:none!important}
+.result{font-size:24px;font-weight:800;line-height:1.45}
+.sub{font-size:16px;margin-top:12px}
+.heart{position:fixed; bottom:-30px; font-size:22px; animation:float 5s linear forwards; pointer-events:none}
+@keyframes beat{50%{transform:scale(1.12)}}
+@keyframes float{to{transform:translateY(-110vh) rotate(25deg);opacity:0}}
+</style>
+</head>
+<body>
+<div class="card" id="card">
+  <div id="question">
+    <div class="emoji">💋</div>
+    <h1>Dhaker… j’ai une question importante ❤️</h1>
+    <p>Est-ce que tu veux me faire un petit bisou ? 🥺💋</p>
+    <div class="buttons">
+      <button id="yes">OUI 😘</button>
+      <button id="no">NON 🙈</button>
+    </div>
+  </div>
+
+  <div id="result" class="hidden">
+    <div class="emoji">🥰💋❤️</div>
+    <div class="result">Je savais que tu allais dire OUI ! 😌❤️</div>
+    <div class="sub">Maintenant viens me faire mon bisou, mon amour 😘</div>
+  </div>
+</div>
+
+<script>
+const no=document.getElementById("no");
+const yes=document.getElementById("yes");
+const question=document.getElementById("question");
+const result=document.getElementById("result");
+
+function moveNo(){
+  const area=no.parentElement.getBoundingClientRect();
+  const maxX=Math.max(0, area.width-no.offsetWidth);
+  const maxY=Math.max(0, area.height-no.offsetHeight);
+  no.style.left=(Math.random()*maxX)+"px";
+  no.style.top=(Math.random()*maxY)+"px";
+  yes.style.transform="scale(1.08)";
+}
+no.addEventListener("mouseenter",moveNo);
+no.addEventListener("touchstart",(e)=>{e.preventDefault();moveNo()});
+no.addEventListener("click",moveNo);
+
+yes.addEventListener("click",()=>{
+  question.classList.add("hidden");
+  result.classList.remove("hidden");
+  for(let i=0;i<45;i++){
+    setTimeout(()=>{
+      const h=document.createElement("div");
+      h.className="heart";
+      h.textContent=["❤️","💗","💕","💋","🥰"][Math.floor(Math.random()*5)];
+      h.style.left=Math.random()*100+"vw";
+      h.style.animationDuration=(3+Math.random()*3)+"s";
+      h.style.fontSize=(18+Math.random()*22)+"px";
+      document.body.appendChild(h);
+      setTimeout(()=>h.remove(),6500);
+    },i*70);
+  }
+});
+</script>
+</body>
+</html>
